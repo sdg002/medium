@@ -25,7 +25,7 @@ def create_data():
     src_points.append([40,40])
     return src_points
 
-def dbscan_demo(data):
+def find_dbscan_clusters(data):
     data_points=data
     epsilon=1
     min_samples=2
@@ -33,13 +33,13 @@ def dbscan_demo(data):
     db.fit(data_points)
     return db.labels_
 
-def display_clusters(cluster_and_noise_labels:[]):
+def display_clusters(data,cluster_and_noise_labels:[]):
     cluster_labels= set(filter(lambda  l: l!=-1, cluster_and_noise_labels))
     count_of_outliers=len(list(filter(lambda  l: l==-1, cluster_and_noise_labels)))
     print("Total clusters produced:%d" % (len(cluster_labels)))
     print("Total outliers produced:%d" % (count_of_outliers))
 
-    data_points=toy_data
+    data_points=data
 
     #Plot the original data points
     x=list(map(lambda p: p[0],data_points))
@@ -65,10 +65,10 @@ def display_clusters(cluster_and_noise_labels:[]):
             axs[1].scatter(point_x, point_y, marker='x', label="Outlier")
         else:
             legend_label="Cluster %d" % (label)
-            axs[1].scatter(point_x, point_y, marker='x', label=legend_label, c=colors[label])
+            axs[1].scatter(point_x, point_y, marker='o', label=legend_label, c=colors[label])
     axs[1].legend(loc="upper left")
     plt.show()
 
 toy_data=create_data()
-cluster_and_noise_labels=dbscan_demo(toy_data)
-display_clusters(cluster_and_noise_labels)
+cluster_and_noise_labels=find_dbscan_clusters(toy_data)
+display_clusters(toy_data,cluster_and_noise_labels)
