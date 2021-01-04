@@ -1,14 +1,21 @@
 # Introduction
-to be done
+In this article I would like to discuss some nuances about the `DBSCAN` clustering algorithm. This is by no means a detailed explanation of the algorithm. The intent of this article is to demonstrate how to calculate the value of `epsilon` parameter when the various dimensions of the features follow different measurement systems. E.g. Age on X axis and Height on Y axis.
 
-# How does DBSCAN algorithm work?
+# An overview of the DBSCAN algorithm
 to be done
+**Picture comes here**
 
-# Essential differences from K-means clustering
-to be done
+# In depth videos to undersand DBSCAN
+https://www.coursera.org/lecture/machine-learning-with-python/dbscan-B8ctK?utm_source=link&utm_medium=page_share&utm_content=vlp&utm_campaign=top_button
 
-# Sample python code
-to be done
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5cOhL4B5waU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+# Very simple code snippet to demonstrate DBSCAN
+**Show matplotlib output here**
+
+# Sample python code using Scikit image
+**Python code snippet comes here**
 
 ```
 import os
@@ -40,9 +47,21 @@ median_filter(inputfilename="Sine-50-percent.png")
 
 ```
 
+# Demo Gist
+<script src="https://gist.github.com/sdg002/b825b141868e0dc33ec739e0b9a574f8.js"></script>
+this does not work!!
 
 
+# What happens when the dimensions of a feature have different units of measurements?
+To be done
+Present the problem here. A toy dataset of age, weight or age, height
 
 
 # Conclusion
+to be done
 
+
+# References
+- https://en.wikipedia.org/wiki/DBSCAN
+- https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html
+- 
