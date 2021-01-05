@@ -44,14 +44,27 @@ def find_line(data_points:np.ndarray,width,height):
     pass
     return blank_image
 
-def save_image(array):
+def save_image(new_image_array:np.ndarray, imagefilename:str):
+    filename_noextension=os.path.splitext(imagefilename)[0]
     folder_script=os.path.dirname(__file__)
-    file_result=os.path.join(folder_script,"result.png")
-    io.imsave(file_result,new_image)
+    file_result=os.path.join(folder_script,"./out/",("result-%s.png") % (filename_noextension))
+    io.imsave(file_result,new_image_array)
 
-#image=read_image_array_as_cartesian_data_points("2ProminentLine.png")
-image,width,height=read_image_array_as_cartesian_data_points("1SmallLine.png")
-new_image=find_line(image,width,height)
-save_image(new_image)
+
+def extract_best_ransac_line(imagefile:str):
+    """
+    Extracts the best possible line using scikit learn's RANSAC function
+    and creates a new image in the Out folder with this line
+    """
+    image,width,height=read_image_array_as_cartesian_data_points(imagefile)
+    new_image=find_line(image,width,height)
+    save_image(new_image,imagefile)
+    pass
+
+
+
+
+extract_best_ransac_line("1SmallLineWithNoise.png")
+extract_best_ransac_line("1SmallLineWithNoise.png")
 
 
