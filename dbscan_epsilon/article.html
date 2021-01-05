@@ -15,7 +15,7 @@
         <main>
             <h1>Introduction</h1>
             <p>
-                In this article I would like to discuss some nuances about the `DBSCAN` clustering algorithm. This is by no means a detailed explanation of the algorithm. The intent of this article is to demonstrate how to calculate the value of `epsilon` parameter when the various dimensions of the features follow different measurement systems. E.g., Age on X axis and Height on Y axis.
+                In this article I would like to discuss some nuances about the `DBSCAN` clustering algorithm. This is by no means a detailed explanation of the algorithm. The intent of this article is to demonstrate how to calculate the value of <strong>`epsilon`</strong> parameter when the various dimensions of the features follow different measurement systems. E.g., Age on X axis and Height on Y axis.
             </p>
 
             <h1>An overview of the DBSCAN algorithm</h1>
@@ -132,12 +132,14 @@ display_clusters(toy_data,cluster_and_noise_labels)
             <p>As seen from the above plot, in this toy dataset the points are scattered into 2 distinct clusters</p>
 
             <h1>Challenge - How to determine epsilon when with 2 different units of measurements on X and Y axis?</h1>
+            <img src="images/Epsilon_BeforeNormalization.PNG"/><br />
+            <img src="images/Epsilon_AfterNormalization.PNG"/><br />
             <p>
                 The parameter <strong>Epsilon</strong> can be imagined as the permitted variation while defining a cluster boundary. 
                 In this example we could use a permitted variation of 1 Kg along the <strong>Weight</strong> axis and 10 cm along the <strong>Height</strong> axis.
-                But, before compute Epsilon, we will need to re-scale both the axis to the same measurement system.
+                But, before we compute Epsilon, we will need to re-scale both the axis to the same measurement system.
                 Let us attempt to normalize the data using the <code>MinMaxScaler</code> class</p>
-            <img src="images/HeightWeightDataPointsClustered.PNG"/>
+            <img src="images/HeightWeightDataPointsClustered.PNG"/><br />
 
             <h1>Accompanying Python code</h1>
             <pre>
