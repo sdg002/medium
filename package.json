@@ -1,0 +1,22 @@
+{
+  "name": "medium",
+  "version": "1.0.0",
+  "description": "My medium articles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdg002/medium.git"
+  },
+  "author": "Sau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdg002/medium/issues"
+  },
+  "homepage": "https://github.com/sdg002/medium#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
