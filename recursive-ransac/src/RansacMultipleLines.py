@@ -16,7 +16,11 @@ class RansacLineInfo(object):
     def __init__(self, inlier_points:np.ndarray, model:LineModelND):
         self.inliers=inlier_points #the inliers that were detected by RANSAC algo
         self.model=model    #The LinearModelND that was a result of RANSAC algo
-        
+
+    @property
+    def unitvector(self):
+        """The unitvector of the model. This is an array of 2 elements (x,y)"""
+        return self.model.params[1]
 
 def read_black_pixels(imagefilename:str):
     #returns a numpy array with shape (N,2) N points, x=[0], y=[1]
@@ -60,6 +64,28 @@ def extract_first_ransac_line(data_points:[], max_distance:int):
         results_inliers.append((x,y))
     return np.array(results_inliers), np.array(results_inliers_removed),model_robust
 
+def generate_plottable_points_along_line(model:LineModelND, xmin:int,xmax:int, ymin:int, ymax:int):
+    """
+    Computes points along the specified line model
+    The visual range is 
+    between xmin and xmax along X axis
+        and
+    between ymin and ymax along Y axis
+    return shape is [[x1,y1],[x2,y2]]
+    """
+    unit_vector=model.params[1]
+    slope=abs(unit_vector[1]/unit_vector[0])
+    x_values=None
+    y_values=None
+    if (slope > 1):
+        y_values=np.arange(ymin, ymax,1)
+        x_values=model.predict_x(y_values)
+    else:        
+        x_values=np.arange(xmin, xmax,1)
+        y_values=model.predict_y(x_values)
+
+    np_data_points=np.column_stack((x_values,y_values)) 
+    return np_data_points
 
 def superimpose_all_inliers(ransac_lines,width:float, height:float):
     #Create an RGB image array with dimension heightXwidth
@@ -71,9 +97,19 @@ def superimpose_all_inliers(ransac_lines,width:float, height:float):
     for line_index in range(0,len(ransac_lines)):
         color=colors[line_index % len(colors)]
         ransac_lineinfo:RansacLineInfo=ransac_lines[line_index]
-        for point in ransac_lineinfo.inliers:
-            x=point[0]
-            y=point[1]
+        inliers=ransac_lineinfo.inliers 
+        y_min=inliers[:,1].min()
+        y_max=inliers[:,1].max()
+        x_min=inliers[:,0].min()
+        x_max=inliers[:,0].max()
+        plottable_points=generate_plottable_points_along_line(ransac_lineinfo.model, xmin=x_min,xmax=x_max, ymin=y_min,ymax=y_max)
+        for point in plottable_points:
+            x=int(round(point[0]))
+            if (x >= width) or (x < 0):
+                continue
+            y=int(round(point[1]))
+            if (y >= height) or (y < 0):
+                continue
             new_y=height-y-1
             new_image[new_y][x][0]=color[0]
             new_image[new_y][x][1]=color[1]
@@ -120,5 +156,8 @@ def extract_multiple_lines_and_save(inputfilename:str,iterations:int, max_distan
 # extract_multiple_lines_and_save("SmallCrossWithNoise.png",5)
 # extract_multiple_lines_and_save("2ProminentLine.png",5)
 #todo some problem in one of the above lines, excpetion
+
+extract_multiple_lines_and_save("1SmallLineWithNoise.png",iterations= 5,max_distance=1, min_inliers_allowed=15)
 extract_multiple_lines_and_save("2ProminentLineWithNoise.png",5,max_distance=3, min_inliers_allowed=5)
 extract_multiple_lines_and_save("3ProminentLineWithNoise.png",5, max_distance=3,min_inliers_allowed=5)
+extract_multiple_lines_and_save("WheelSpoke.png",iterations= 30,max_distance=1, min_inliers_allowed=50)
