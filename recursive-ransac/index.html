@@ -21,8 +21,8 @@
                 Ever model is evaluated for the total count of inlier points. An inlier is defined as a point which is within
                 a specified threshold distance from the line.
                 evaluates the how good the model fits. The text book implementation of the RANSAC algorithm produces a single line (if one exists). This is the line with the maximum outliers.
-                In this article we explore how to improvise the traditional RANSAC algorithm by running it repetitively on the same image to find 
-                multiple straight lines.                
+                In this article we explore how to improvise the traditional RANSAC algorithm by running it repetitively on the same image to find
+                multiple straight lines.
             </p>
             <h2>Example - Noise free</h2>
             <p>A noise free image on the left and the lines detected using the recursive RANSAC approach on the right</p>
@@ -31,7 +31,11 @@
             <h2>Example - With salt pepper noise</h2>
             <p>Same image with some salt-pepper noise on the left and the lines detected using the recursive RANSAC approach on the right</p>
             <img src="images/WheelSpokesWithNoiseDemo.png" />
+            <h2>Example - Noisy image with 2 lines</h2>
+            <img src="images/2NoisyLines.PNG" />
 
+            <h2>Example - Noisy image with 3 lines</h2>
+            <img src="images/3NoisyLines.PNG" />
 
             <!--
         Show before and after picture of what can be achieved with this approach
@@ -49,7 +53,7 @@
             <h2>How does RANSAC algorithm help?</h2>
             <p>
                 RANSAC is a simple voting-based algorithm that iteratively samples the population of points and find the subset of those lines which appear to conform
-                a model. In this case, the model is a straight line.
+                to a model. In this case, the model is a straight line.
             </p>
             <img src="images/desired_line_mind.png"/>
         </section>
@@ -70,7 +74,7 @@
             Consider this threshold as a means of eliminating undesired lines.</p>
             <ul>
                 <li>Link to python code is <a href="src.zip">here</a></li>
-                <li>Sample images used for developing the code is bundles along with the Python code</li>
+                <li>Sample images used for developing the code is bundled along with the Python code</li>
             </ul>
         </section>
         <section>
@@ -80,8 +84,11 @@
             removal of points which could be potential inliers for the second line</p>
 
             <p>The overall success of the recursive RANSAC approach is dependent on the stopping criterion. I have used the inlier count as a signal to stop. 
-            But this may not be best choice. Another choice could be the ration of inlier count to the length of the line segment. 
+            But this may not be best choice. Another choice could be the ratio of inlier count to the length of the line segment. 
             A very low value would indicate that the discovered line is too sparse to be of any practical value</p>
+
+            <p>What do you think of this approach? Do you know of any alternatives? I am not sure if this has been tried before. Either ways , I would like to hear 
+            from you and make improvements where possible.</p>
         </section>
 
     </main>
