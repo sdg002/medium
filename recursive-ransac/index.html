@@ -16,7 +16,7 @@
         <section>
             <h1>Overview</h1>
             <p>
-                In this article we will explore how we can harness the power of the RANSAC algorithm to detect multiple lines in an image.
+                In this article I have presented an approach to harness the power of the RANSAC algorithm to detect multiple lines in an image.
                 RANAC is a robust line detection algorithm which iteratively creates line models using a subset of points.
                 Ever model is evaluated for the total count of inlier points. An inlier is defined as a point which is within
                 a specified threshold distance from the line.
@@ -48,13 +48,13 @@
             <img src="images/all_data_points.png" />
             <h2>How does RANSAC algorithm help?</h2>
             <p>
-                RANSAC is a simple voting based algorithm that iteratively samples the population of points and find the subset of those lines which appear to conform
+                RANSAC is a simple voting-based algorithm that iteratively samples the population of points and find the subset of those lines which appear to conform
                 a model. In this case, the model is a straight line.
             </p>
             <img src="images/desired_line_mind.png"/>
         </section>
         <section>
-            <h1>Running RANSAC recursively</h1>
+            <h1>Running RANSAC recursively- How it works?</h1>
             <img src="powerpnt/recursive_ransac/Slide2.PNG" /><br />
             <img src="powerpnt/recursive_ransac/Slide3.PNG" /><br />
             <img src="powerpnt/recursive_ransac/Slide4.PNG" /><br />
@@ -64,21 +64,24 @@
         </section>
         <section>
             <h1>Accompanying code</h1>
-            <p>I have wrapped Scikit Learn's RANSAC implementation. As a stopping criteria, I am using halting the search for further lines when no more inliers
-            are left OR when RANSAC produces a line with a count of inliers below a certain threshold</p>
+            <p>I have wrapped <a href="https://scikit-image.org/docs/dev/auto_examples/transform/plot_ransac.html">Scikit Learn's RANSAC </a> implementation.
+            As a stopping criteria, I am halting the iteration for further lines when no more inliers
+            are left OR when RANSAC produces a line with a count of inliers below a certain threshold. This threshold is a configurable parameter. 
+            Consider this threshold as a means of eliminating undesired lines.</p>
             <ul>
-                <li>Link to python code is here (TO BE DONE)</li>
-                <li>Sample images used for developing the code is here (TO BE DONE)</li>
+                <li>Link to python code is <a href="src.zip">here</a></li>
+                <li>Sample images used for developing the code is bundles along with the Python code</li>
             </ul>
         </section>
         <section>
             <h1>Conclusion and caveats</h1>
-            <p>to be done</p>
-            <!--
-                
-            During each iteration you are removing points, some of these points play an important role in the discovery of the subsequent lines
-            The success of the recursive approach is influenced by the stopping criteria
-            -->
+            <p>In my approach, I am eliminating the inlier points after every iteration. This could impact the discovery of the next line. 
+            Consider the situation when the region of intersection of 2 lines is heavily crowded and your discovery of line 1 has led to 
+            removal of points which could be potential inliers for the second line</p>
+
+            <p>The overall success of the recursive RANSAC approach is dependent on the stopping criterion. I have used the inlier count as a signal to stop. 
+            But this may not be best choice. Another choice could be the ration of inlier count to the length of the line segment. 
+            A very low value would indicate that the discovered line is too sparse to be of any practical value</p>
         </section>
 
     </main>
