@@ -13,9 +13,7 @@ min_samples=3 #RANSAC parameter - The minimum number of data points to fit a mod
 def read_black_pixels(imagefilename:str):
     #returns a numpy array with shape (N,2) N points, x=[0], y=[1]
     #The coordinate system is Cartesian
-    folder_script=os.path.dirname(__file__)
-    file_noisy_curve=os.path.join(folder_script,imagefilename)
-    np_image=io.imread(file_noisy_curve,as_gray=True)
+    np_image=io.imread(imagefilename,as_gray=True)
     black_white_threshold=0
     if (np_image.dtype == 'float'):
         black_white_threshold=0.5
@@ -76,8 +74,12 @@ def extract_multiple_lines_and_save(inputfilename:str,iterations:int, max_distan
     """
     print("---------------------------------------")
     print("Processing: %s" % (inputfilename))
+    folder_script=os.path.dirname(__file__)
+    absolute_path=os.path.join(folder_script,"images/",inputfilename)
+
     results=[]
-    all_black_points,width,height=read_black_pixels(inputfilename)
+    all_black_points,width,height=read_black_pixels(absolute_path)
+    print("Found %d pixels in the file %s" % (len(all_black_points),inputfilename))
     starting_points=all_black_points
     for index in range(0,iterations):
         if (len(starting_points) <= min_samples):
