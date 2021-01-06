@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Recursive RANSAC approach to find all straight lines in an image</title>
+    <title>Recursive RANSAC approach to finding all straight lines in an image</title>
 </head>
 
 <body>
@@ -20,14 +20,16 @@
                 RANAC is a robust line detection algorithm which iteratively creates line models using a subset of points.
                 Ever model is evaluated for the total count of inlier points. An inlier is defined as a point which is within
                 a specified threshold distance from the line.
-                evaluates the how good the model fits
-                This is not a detailed description of the RANSAC algorithm
+                evaluates the how good the model fits. The text book implementation of the RANSAC algorithm produces a single line (if one exists). This is the line with the maximum outliers.
+                In this article we explore how to improvise the traditional RANSAC algorithm by running it repetitively on the same image to find 
+                multiple straight lines.                
             </p>
-            <h2>Examples</h2>
-            <p>A noise free image on the left and the lines detected via RANSAC on the right</p>
+            <h2>Example - Noise free</h2>
+            <p>A noise free image on the left and the lines detected using the recursive RANSAC approach on the right</p>
             <img src="images/WheelSpokesNoNoiseDemo.png" />
 
-            <p>Same image with some salt-pepper noise on the left and the lines detected via RANSAC on the right</p>
+            <h2>Example - With salt pepper noise</h2>
+            <p>Same image with some salt-pepper noise on the left and the lines detected using the recursive RANSAC approach on the right</p>
             <img src="images/WheelSpokesWithNoiseDemo.png" />
 
 
@@ -37,15 +39,37 @@
         </section>
         <section>
             <h1>An overview of RANSAC</h1>
-            <p>to be done</p>
+            <p>This is not a detailed explanation of the RANSAC algorithm.                        
+            </p>
+            <h2>Consider the data points below</h2>
+            <p>
+                We have a mix of inliers (black) and outliers (red). We want to find the model of the straight line which fits the inliers
+            </p>
+            <img src="images/all_data_points.png" />
+            <h2>How does RANSAC algorithm help?</h2>
+            <p>
+                RANSAC is a simple voting based algorithm that iteratively samples the population of points and find the subset of those lines which appear to conform
+                a model. In this case, the model is a straight line.
+            </p>
+            <img src="images/desired_line_mind.png"/>
         </section>
         <section>
             <h1>Running RANSAC recursively</h1>
-            <p>to be done</p>
+            <img src="powerpnt/recursive_ransac/Slide2.PNG" /><br />
+            <img src="powerpnt/recursive_ransac/Slide3.PNG" /><br />
+            <img src="powerpnt/recursive_ransac/Slide4.PNG" /><br />
+            <img src="powerpnt/recursive_ransac/Slide5.PNG" /><br />
+            <img src="powerpnt/recursive_ransac/Slide6.PNG" /><br />
+            <img src="powerpnt/recursive_ransac/Slide7.PNG" /><br />
         </section>
         <section>
-            <h1>Chapter 4</h1>
-            <p>to be done</p>
+            <h1>Accompanying code</h1>
+            <p>I have wrapped Scikit Learn's RANSAC implementation. As a stopping criteria, I am using halting the search for further lines when no more inliers
+            are left OR when RANSAC produces a line with a count of inliers below a certain threshold</p>
+            <ul>
+                <li>Link to python code is here (TO BE DONE)</li>
+                <li>Sample images used for developing the code is here (TO BE DONE)</li>
+            </ul>
         </section>
         <section>
             <h1>Conclusion and caveats</h1>
