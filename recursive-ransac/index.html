@@ -2,27 +2,45 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Title comes here</title>
+    <title>Recursive RANSAC approach to find all straight lines in an image</title>
 </head>
 
 <body>
     <header>
         <h1>
-            title comes here
+            Recursive RANSAC approach to find all straight lines in an image
         </h1>
     </header>
 
     <main>
         <section>
-            <h1>Chapter 1</h1>
+            <h1>Overview</h1>
+            <p>
+                In this article we will explore how we can harness the power of the RANSAC algorithm to detect multiple lines in an image.
+                RANAC is a robust line detection algorithm which iteratively creates line models using a subset of points.
+                Ever model is evaluated for the total count of inlier points. An inlier is defined as a point which is within
+                a specified threshold distance from the line.
+                evaluates the how good the model fits
+                This is not a detailed description of the RANSAC algorithm
+            </p>
+            <h2>Examples</h2>
+            <p>A noise free image on the left and the lines detected via RANSAC on the right</p>
+            <img src="images/WheelSpokesNoNoiseDemo.png" />
+
+            <p>Same image with some salt-pepper noise on the left and the lines detected via RANSAC on the right</p>
+            <img src="images/WheelSpokesWithNoiseDemo.png" />
+
+
+            <!--
+        Show before and after picture of what can be achieved with this approach
+    -->
+        </section>
+        <section>
+            <h1>An overview of RANSAC</h1>
             <p>to be done</p>
         </section>
         <section>
-            <h1>Chapter 2</h1>
-            <p>to be done</p>
-        </section>
-        <section>
-            <h1>Chapter 3</h1>
+            <h1>Running RANSAC recursively</h1>
             <p>to be done</p>
         </section>
         <section>
@@ -30,8 +48,13 @@
             <p>to be done</p>
         </section>
         <section>
-            <h1>Chapter 5</h1>
+            <h1>Conclusion and caveats</h1>
             <p>to be done</p>
+            <!--
+                
+            During each iteration you are removing points, some of these points play an important role in the discovery of the subsequent lines
+            The success of the recursive approach is influenced by the stopping criteria
+            -->
         </section>
 
     </main>

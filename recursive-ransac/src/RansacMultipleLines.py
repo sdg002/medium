@@ -157,7 +157,8 @@ def extract_multiple_lines_and_save(inputfilename:str,iterations:int, max_distan
 # extract_multiple_lines_and_save("2ProminentLine.png",5)
 #todo some problem in one of the above lines, excpetion
 
-extract_multiple_lines_and_save("1SmallLineWithNoise.png",iterations= 5,max_distance=1, min_inliers_allowed=15)
-extract_multiple_lines_and_save("2ProminentLineWithNoise.png",5,max_distance=3, min_inliers_allowed=5)
-extract_multiple_lines_and_save("3ProminentLineWithNoise.png",5, max_distance=3,min_inliers_allowed=5)
+# extract_multiple_lines_and_save("1SmallLineWithNoise.png",iterations= 5,max_distance=1, min_inliers_allowed=15)
+# extract_multiple_lines_and_save("2ProminentLineWithNoise.png",5,max_distance=3, min_inliers_allowed=5)
+# extract_multiple_lines_and_save("3ProminentLineWithNoise.png",5, max_distance=3,min_inliers_allowed=5)
 extract_multiple_lines_and_save("WheelSpoke.png",iterations= 30,max_distance=1, min_inliers_allowed=50)
+extract_multiple_lines_and_save("WheelSpokeNoise.png",iterations= 30,max_distance=1, min_inliers_allowed=50)
